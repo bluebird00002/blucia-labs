@@ -17,11 +17,13 @@
   from = "/*"
   to = "/index.html"
   status = 200
+  force = false
 
-# API proxy to your backend (update with your Railway URL after backend deployment)
+# Proxy API calls to Render backend
+# Replace 'your-backend.onrender.com' with your actual Render backend URL
 [[redirects]]
   from = "/api/*"
-  to = "https://your-railway-app.railway.app/api/:splat"
+  to = "https://blucia-backend.onrender.com/api/:splat"
   status = 200
   force = true
 

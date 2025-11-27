@@ -27,7 +27,7 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Middleware - Allow CORS from local network
+// Middleware - Allow CORS from local network and production frontend
 const allowedOrigins = [
   process.env.FRONTEND_URL || "http://localhost:3000",
   "http://localhost:3000",
@@ -42,6 +42,18 @@ app.use(
       // Allow requests with no origin (mobile apps, Postman, etc.)
       if (!origin) return callback(null, true);
 
+      // In production, allow frontend URL and Netlify preview URLs
+      if (process.env.NODE_ENV === 'production') {
+        const frontendUrl = process.env.FRONTEND_URL;
+        if (frontendUrl && origin.startsWith(frontendUrl)) {
+          return callback(null, true);
+        }
+        // Allow Netlify preview URLs
+        if (origin.includes('.netlify.app') || origin.includes('.netlify.com')) {
+          return callback(null, true);
+        }
+      }
+
       // Check if origin matches allowed patterns
       if (
         allowedOrigins.some((pattern) => {
@@ -53,7 +65,8 @@ app.use(
       ) {
         callback(null, true);
       } else {
-        callback(null, true); // Allow all in development
+        // In development, allow all origins
+        callback(null, true);
       }
     },
     credentials: true,

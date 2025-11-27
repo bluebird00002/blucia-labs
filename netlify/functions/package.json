@@ -1,0 +1,12 @@
+{
+  "name": "blucia-labs-netlify-functions",
+  "version": "1.0.0",
+  "description": "Netlify serverless functions for BluCia Labs",
+  "type": "module",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.16.3"
+  }
+}
+

@@ -1,0 +1,35 @@
+# Render.com deployment configuration for BluCia Labs Backend
+# This file makes deployment easier - Render will auto-detect it
+
+services:
+  # Backend Web Service
+  - type: web
+    name: blucia-backend
+    runtime: node
+    plan: free  # Change to 'starter' or 'standard' for paid plans
+    region: oregon  # Choose: oregon, frankfurt, singapore, mumbai, sydney
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000  # Render free tier uses port 10000
+      - key: JWT_SECRET
+        generateValue: true  # Render will generate a secure value
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: FRONTEND_URL
+        sync: false  # You'll set this manually after getting your Netlify URL
+      # Add DATABASE_URL after creating PostgreSQL service below
+      # Add other env vars manually in Render dashboard
+
+databases:
+  # PostgreSQL Database
+  - name: blucia-database
+    plan: free  # Free tier: 90 days retention, 1GB storage
+    databaseName: blucia_labs
+    user: blucia_user
+    region: oregon  # Should match web service region
+
