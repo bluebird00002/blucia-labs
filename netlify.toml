@@ -12,20 +12,20 @@
   # Node version
   NODE_VERSION = "18"
 
-# Redirect all routes to index.html for SPA
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-  force = false
-
-# Proxy API calls to Render backend
+# Proxy API calls to Render backend (MUST come before SPA redirect)
 # Replace 'your-backend.onrender.com' with your actual Render backend URL
 [[redirects]]
   from = "/api/*"
   to = "https://blucia-backend.onrender.com/api/:splat"
   status = 200
   force = true
+
+# Redirect all other routes to index.html for SPA
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = false
 
 # Headers for security
 [[headers]]
