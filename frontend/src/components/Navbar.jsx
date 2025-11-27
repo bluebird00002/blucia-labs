@@ -92,16 +92,7 @@ const Navbar = () => {
               />
             </div>
           </Link>
-          <Link to="/" className="flex items-center space-x-6 group">
-            <div className="w-24 h-24 rounded-[1.75rem] overflow-hidden transform group-hover:scale-105 transition-transform">
-              <img
-                src={logoImg}
-                alt="BluCia Labs logo"
-                className="w-full h-full object-cover"
-                loading="lazy"
-              />
-            </div>
-          </Link>
+
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navLinks.map((link) => (
