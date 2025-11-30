@@ -13,7 +13,7 @@
   NODE_VERSION = "18"
 
 # Proxy API calls to Render backend (MUST come before SPA redirect)
-# Replace 'your-backend.onrender.com' with your actual Render backend URL
+# This redirect must be processed BEFORE the SPA catch-all below
 [[redirects]]
   from = "/api/*"
   to = "https://blucia-backend.onrender.com/api/:splat"
